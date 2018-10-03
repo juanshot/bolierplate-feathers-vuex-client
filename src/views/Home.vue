@@ -1,54 +1,35 @@
 <template>
-  <div class="home">
-    <input @keyup.enter="newClient" v-model="text" type="text">
-    <button @click="newClient">
-      Crear Nuevo Cliente
-    </button>
-    <div v-for="client in clients" :key="client._id">
-      {{client.text}}
-    </div>
-  </div>
+  <v-container fluid>
+    <v-slide-y-transition mode="out-in">
+      <v-layout column align-center>
+        <img src="@/assets/logo.png" alt="Vuetify.js" class="mb-5">
+        <blockquote>
+          &#8220;First, solve the cdofidofidfoproblem. Then, write the code.&#8221;
+          <footer>
+            <small>
+              <em>&mdash;John Johnson</em>
+            </small>
+          </footer>
+        </blockquote>
+      </v-layout>
+    </v-slide-y-transition>
+  </v-container>
 </template>
 
-<script>
-// @ is an alias to /src
-import { mapGetters, mapActions } from 'vuex'
-
-export default {
-  name: 'home',
-  data () {
-    return {
-      text: '',
-      clients: []
-    }
-  },
-  methods: {
-    ...mapActions('clients', { getClientsFromService: 'find' }),
-    newClient () {
-      const { Client } = this.$FeathersVuex
-      let cliente = new Client({ text: this.text })
-      cliente.save().then((res) => {
-        this.getClientsFromService().then(res => {
-          this.text = ''
-          this.clients = res.data
-        })
-      })
-    }
-  },
-  computed: {
-    ...mapGetters('clients', { getClientsInStore: 'find' }),
-    getClients () {
-      return this.getClientsInStore().data
-    }
-  },
-
-  created () {
-    console.log('este es el getter', this.getClients)
-    this.getClientsFromService().then(res => {
-      this.clients = res.data
-    })
-  },
-  components: {
-  }
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+h1, h2 {
+  font-weight: normal;
 }
-</script>
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+</style>
