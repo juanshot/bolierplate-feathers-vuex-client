@@ -10,7 +10,8 @@ export default new Vuex.Store({
   plugins: [
     service('clients', {
       instanceDefaults: {
-        text: ''
+        name: '',
+        email: ''
       }
     })
   ],
